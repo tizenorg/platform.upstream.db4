@@ -13,7 +13,6 @@ Url:            http://www.sleepycat.com
 Source:         db-%{version}.tar.gz
 Source1:        %{name}.changes
 Source9:        getpatches
-Patch0:         db-%{version}.patch
 BuildRequires:  autoconf
 BuildRequires:  fdupes
 BuildRequires:  gcc-c++
@@ -61,7 +60,6 @@ This package contains the header files and libraries.
 
 %prep
 %setup -q -n %{generic_name}-%{version}
-%patch0
 cd ..
 tar -jcf %{generic_name}-%{version}.tar.bz2 %{generic_name}-%{version}
 
