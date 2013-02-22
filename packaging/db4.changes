@@ -1,0 +1,3 @@
+* Fri Feb 22 2013 Patrick McCarty <patrick.mccarty@linux.intel.com> upstream/4.8.30.NC@23fad31
+- Fix package name in baselibs.conf
+
