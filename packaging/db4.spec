@@ -13,6 +13,7 @@ Url:            http://www.sleepycat.com
 Source:         db-%{version}.tar.gz
 Source1:        %{name}.changes
 Source9:        getpatches
+Source1001: 	db4.manifest
 BuildRequires:  autoconf
 BuildRequires:  fdupes
 BuildRequires:  gcc-c++
@@ -60,6 +61,7 @@ This package contains the header files and libraries.
 
 %prep
 %setup -q -n %{generic_name}-%{version}
+cp %{SOURCE1001} .
 cd ..
 tar -jcf %{generic_name}-%{version}.tar.bz2 %{generic_name}-%{version}
 
@@ -145,11 +147,13 @@ rm -rf %{buildroot}%{_libdir}/tls/*.la
 %postun -p /sbin/ldconfig
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %{_libdir}/libdb-%{major}.%{minor}.so
 %{_libdir}/libdb_cxx-%{major}.%{minor}.so
 
 %files doc
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %dir %{docdir}
 %doc %{docdir}/LICENSE
@@ -166,6 +170,7 @@ rm -rf %{buildroot}%{_libdir}/tls/*.la
 %doc %{docdir}/tutorial
 
 %files utils
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %{_bindir}/db_archive
 %{_bindir}/db_checkpoint
@@ -181,6 +186,7 @@ rm -rf %{buildroot}%{_libdir}/tls/*.la
 %{_bindir}/db_hotbackup
 
 %files devel
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %dir %{_includedir}/db4
 %{_includedir}/db.h
