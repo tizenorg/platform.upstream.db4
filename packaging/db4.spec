@@ -62,8 +62,6 @@ This package contains the header files and libraries.
 %prep
 %setup -q -n %{generic_name}-%{version}
 cp %{SOURCE1001} .
-cd ..
-tar -jcf %{generic_name}-%{version}.tar.bz2 %{generic_name}-%{version}
 
 %build
 cd dist
