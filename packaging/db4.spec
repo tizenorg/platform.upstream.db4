@@ -72,8 +72,9 @@ DIST_DATE=`date '+%B %e, %Y' --date="@$LAST_MOD"`
 sed -i -e "s/^DB_RELEASE_DATE=.*$/DB_RELEASE_DATE=\"$DIST_DATE\"/" RELEASE
 ./s_config
 CFLAGS="%{optflags} -fno-strict-aliasing"
-CC=gcc
-export CFLAGS CXXFLAGS CC
+CC=clang
+CXX="clang++ -stdlib=libc++"
+export CFLAGS CXXFLAGS CC CXX
 #
 # Build now the NPTL version
 #
