@@ -7,7 +7,7 @@ Name:           db4
 Version:        %{major}.%{minor}.30.NC
 Release:        0
 Summary:        Berkeley DB Database Library Version 4.8
-License:        BSD-3-Clause
+License:        BSD-2.0
 Group:          System/Libraries
 Url:            http://www.sleepycat.com
 Source:         db-%{version}.tar.gz
