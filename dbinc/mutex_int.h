@@ -886,7 +886,7 @@ typedef volatile unsigned char tsl_t;
  * DB_MUTEXMGR --
  *	The mutex manager encapsulates the mutex system.
  */
-struct __db_mutexmgr {
+struct __attribute__ ((visibility ("default"))) __db_mutexmgr {
 	/* These fields are never updated after creation, so not protected. */
 	DB_ENV	*dbenv;			/* Environment */
 	REGINFO	 reginfo;		/* Region information */

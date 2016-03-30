@@ -157,8 +157,8 @@ typedef struct vendor {
 } VENDOR;
 
 // Forward declarations
-class Db;
-class Dbt;
+class __attribute__ ((visibility ("default"))) Db;
+class __attribute__ ((visibility ("default"))) Dbt;
 
 // Used to extract an inventory item's name from an
 // inventory database record. This function is used to create

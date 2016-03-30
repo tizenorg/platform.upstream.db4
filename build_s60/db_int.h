@@ -508,7 +508,7 @@ typedef struct __pin_list {
 } PIN_LIST;
 #define	PINMAX 4
 
-struct __db_thread_info {
+struct __attribute__ ((visibility ("default"))) __db_thread_info {
 	pid_t		dbth_pid;
 	db_threadid_t	dbth_tid;
 	DB_THREAD_STATE	dbth_state;
@@ -550,7 +550,7 @@ typedef struct __flag_map {
  * separate structures allows us to easily discard internal information without
  * discarding the user's configuration.
  */
-struct __env {
+struct __attribute__ ((visibility ("default"))) __env {
 	DB_ENV *dbenv;			/* Linked DB_ENV structure */
 
 	/*
@@ -704,7 +704,7 @@ struct __env {
 	DB_LOCK		lock;		/* Cursor lock. */		\
 	db_lockmode_t	lock_mode;	/* Lock mode. */
 
-struct __dbc_internal {
+struct __attribute__ ((visibility ("default"))) __dbc_internal {
 	__DBC_INTERNAL
 };
 

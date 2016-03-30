@@ -64,30 +64,30 @@
 
 #include "db.h"
 
-class Db;                                        // forward
-class Dbc;                                       // forward
-class DbEnv;                                     // forward
-class DbInfo;                                    // forward
-class DbLock;                                    // forward
-class DbLogc;                                    // forward
-class DbLsn;                                     // forward
-class DbMpoolFile;                               // forward
-class DbPreplist;                                // forward
-class DbSequence;                                // forward
-class Dbt;                                       // forward
-class DbTxn;                                     // forward
+class __attribute__ ((visibility ("default"))) Db;                                        // forward
+class __attribute__ ((visibility ("default"))) Dbc;                                       // forward
+class __attribute__ ((visibility ("default"))) DbEnv;                                     // forward
+class __attribute__ ((visibility ("default"))) DbInfo;                                    // forward
+class __attribute__ ((visibility ("default"))) DbLock;                                    // forward
+class __attribute__ ((visibility ("default"))) DbLogc;                                    // forward
+class __attribute__ ((visibility ("default"))) DbLsn;                                     // forward
+class __attribute__ ((visibility ("default"))) DbMpoolFile;                               // forward
+class __attribute__ ((visibility ("default"))) DbPreplist;                                // forward
+class __attribute__ ((visibility ("default"))) DbSequence;                                // forward
+class __attribute__ ((visibility ("default"))) Dbt;                                       // forward
+class __attribute__ ((visibility ("default"))) DbTxn;                                     // forward
 
-class DbMultipleIterator;                        // forward
-class DbMultipleKeyDataIterator;                 // forward
-class DbMultipleRecnoDataIterator;               // forward
-class DbMultipleDataIterator;                    // forward
+class __attribute__ ((visibility ("default"))) DbMultipleIterator;                        // forward
+class __attribute__ ((visibility ("default"))) DbMultipleKeyDataIterator;                 // forward
+class __attribute__ ((visibility ("default"))) DbMultipleRecnoDataIterator;               // forward
+class __attribute__ ((visibility ("default"))) DbMultipleDataIterator;                    // forward
 
-class DbException;                               // forward
-class DbDeadlockException;                       // forward
-class DbLockNotGrantedException;                 // forward
-class DbMemoryException;                         // forward
-class DbRepHandleDeadException;                  // forward
-class DbRunRecoveryException;                    // forward
+class __attribute__ ((visibility ("default"))) DbException;                               // forward
+class __attribute__ ((visibility ("default"))) DbDeadlockException;                       // forward
+class __attribute__ ((visibility ("default"))) DbLockNotGrantedException;                 // forward
+class __attribute__ ((visibility ("default"))) DbMemoryException;                         // forward
+class __attribute__ ((visibility ("default"))) DbRepHandleDeadException;                  // forward
+class __attribute__ ((visibility ("default"))) DbRunRecoveryException;                    // forward
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -175,7 +175,7 @@ extern "C" {
 //
 // Represents a database table = a set of keys with associated values.
 //
-class _exported Db
+class _exported __attribute__ ((visibility ("default"))) Db
 {
 	friend class DbEnv;
 
@@ -389,7 +389,7 @@ public:
 //
 // Cursor
 //
-class _exported Dbc : protected DBC
+class _exported __attribute__ ((visibility ("default"))) Dbc : protected DBC
 {
 	friend class Db;
 
@@ -428,7 +428,7 @@ private:
 // Note that if you use the default constructor, you must explicitly
 // call appinit() before any other db activity (e.g. opening files)
 //
-class _exported DbEnv
+class _exported __attribute__ ((visibility ("default"))) DbEnv
 {
 	friend class Db;
 	friend class DbLock;
@@ -793,7 +793,7 @@ private:
 //
 // Lock
 //
-class _exported DbLock
+class _exported __attribute__ ((visibility ("default"))) DbLock
 {
 	friend class DbEnv;
 
@@ -814,7 +814,7 @@ protected:
 //
 // Log cursor
 //
-class _exported DbLogc : protected DB_LOGC
+class _exported __attribute__ ((visibility ("default"))) DbLogc : protected DB_LOGC
 {
 	friend class DbEnv;
 
@@ -840,7 +840,7 @@ private:
 //
 // Log sequence number
 //
-class _exported DbLsn : public DB_LSN
+class _exported __attribute__ ((visibility ("default"))) DbLsn : public DB_LSN
 {
 	friend class DbEnv;          // friendship needed to cast to base class
 	friend class DbLogc;         // friendship needed to cast to base class
@@ -849,7 +849,7 @@ class _exported DbLsn : public DB_LSN
 //
 // Memory pool file
 //
-class _exported DbMpoolFile
+class _exported __attribute__ ((visibility ("default"))) DbMpoolFile
 {
 	friend class DbEnv;
 	friend class Db;
@@ -914,7 +914,7 @@ private:
 //
 // This is filled in and returned by the DbEnv::txn_recover() method.
 //
-class _exported DbPreplist
+class _exported __attribute__ ((visibility ("default"))) DbPreplist
 {
 public:
 	DbTxn *txn;
@@ -924,7 +924,7 @@ public:
 //
 // A sequence record in a database
 //
-class _exported DbSequence
+class _exported __attribute__ ((visibility ("default"))) DbSequence
 {
 public:
 	DbSequence(Db *db, u_int32_t flags);
@@ -984,7 +984,7 @@ private:
 //
 // Transaction
 //
-class _exported DbTxn
+class _exported __attribute__ ((visibility ("default"))) DbTxn
 {
 	friend class DbEnv;
 
@@ -1081,7 +1081,7 @@ private:
 //
 // A chunk of data, maybe a key or value.
 //
-class _exported Dbt : private DBT
+class _exported __attribute__ ((visibility ("default"))) Dbt : private DBT
 {
 	friend class Db;
 	friend class Dbc;
@@ -1149,7 +1149,7 @@ private:
 // DbMultipleIterator is a shared private base class for the three types
 // of bulk-return Iterator;  it should never be instantiated directly,
 // but it handles the functionality shared by its subclasses.
-class _exported DbMultipleIterator
+class _exported __attribute__ ((visibility ("default"))) DbMultipleIterator
 {
 public:
 	DbMultipleIterator(const Dbt &dbt);
@@ -1158,21 +1158,21 @@ protected:
 	u_int32_t *p_;
 };
 
-class _exported DbMultipleKeyDataIterator : private DbMultipleIterator
+class _exported __attribute__ ((visibility ("default"))) DbMultipleKeyDataIterator : private DbMultipleIterator
 {
 public:
 	DbMultipleKeyDataIterator(const Dbt &dbt) : DbMultipleIterator(dbt) {}
 	bool next(Dbt &key, Dbt &data);
 };
 
-class _exported DbMultipleRecnoDataIterator : private DbMultipleIterator
+class _exported __attribute__ ((visibility ("default"))) DbMultipleRecnoDataIterator : private DbMultipleIterator
 {
 public:
 	DbMultipleRecnoDataIterator(const Dbt &dbt) : DbMultipleIterator(dbt) {}
 	bool next(db_recno_t &recno, Dbt &data);
 };
 
-class _exported DbMultipleDataIterator : private DbMultipleIterator
+class _exported __attribute__ ((visibility ("default"))) DbMultipleDataIterator : private DbMultipleIterator
 {
 public:
 	DbMultipleDataIterator(const Dbt &dbt) : DbMultipleIterator(dbt) {}
@@ -1188,7 +1188,7 @@ public:
 // DbMultipleBuilder is a shared private base class for the three types
 // of bulk buffer builders;  it should never be instantiated directly,
 // but it handles the functionality shared by its subclasses.
-class _exported DbMultipleBuilder
+class _exported __attribute__ ((visibility ("default"))) DbMultipleBuilder
 {
 public:
 	DbMultipleBuilder(Dbt &dbt);
@@ -1197,7 +1197,7 @@ protected:
 	void *p_;
 };
 
-class _exported DbMultipleDataBuilder : DbMultipleBuilder
+class _exported __attribute__ ((visibility ("default"))) DbMultipleDataBuilder : DbMultipleBuilder
 {
 public:
 	DbMultipleDataBuilder(Dbt &dbt) : DbMultipleBuilder(dbt) {}
@@ -1205,7 +1205,7 @@ public:
 	bool reserve(void *&ddest, size_t dlen);
 };
 
-class _exported DbMultipleKeyDataBuilder : DbMultipleBuilder
+class _exported __attribute__ ((visibility ("default"))) DbMultipleKeyDataBuilder : DbMultipleBuilder
 {
 public:
 	DbMultipleKeyDataBuilder(Dbt &dbt) : DbMultipleBuilder(dbt) {}
@@ -1213,7 +1213,7 @@ public:
 	bool reserve(void *&kdest, size_t klen, void *&ddest, size_t dlen);
 };
 
-class _exported DbMultipleRecnoDataBuilder
+class _exported __attribute__ ((visibility ("default"))) DbMultipleRecnoDataBuilder
 {
 public:
 	DbMultipleRecnoDataBuilder(Dbt &dbt);
@@ -1234,7 +1234,7 @@ protected:
 // Every exception should be considered an abnormality
 // (e.g. bug, misuse of DB, file system error).
 //
-class _exported DbException : public __DB_STD(exception)
+class _exported __attribute__ ((visibility ("default"))) DbException : public __DB_STD(exception)
 {
 public:
 	virtual ~DbException() throw();
@@ -1262,7 +1262,7 @@ private:
 // A specific sort of exception that occurs when
 // an operation is aborted to resolve a deadlock.
 //
-class _exported DbDeadlockException : public DbException
+class _exported __attribute__ ((visibility ("default"))) DbDeadlockException : public DbException
 {
 public:
 	virtual ~DbDeadlockException() throw();
@@ -1278,7 +1278,7 @@ public:
 // Note that the Dbt is only live as long as the Dbt used
 // in the offending call.
 //
-class _exported DbLockNotGrantedException : public DbException
+class _exported __attribute__ ((visibility ("default"))) DbLockNotGrantedException : public DbException
 {
 public:
 	virtual ~DbLockNotGrantedException() throw();
@@ -1308,7 +1308,7 @@ private:
 // A specific sort of exception that occurs when
 // user declared memory is insufficient in a Dbt.
 //
-class _exported DbMemoryException : public DbException
+class _exported __attribute__ ((visibility ("default"))) DbMemoryException : public DbException
 {
 public:
 	virtual ~DbMemoryException() throw();
@@ -1327,7 +1327,7 @@ private:
 // A specific sort of exception that occurs when a change of replication
 // master requires that all handles be re-opened.
 //
-class _exported DbRepHandleDeadException : public DbException
+class _exported __attribute__ ((visibility ("default"))) DbRepHandleDeadException : public DbException
 {
 public:
 	virtual ~DbRepHandleDeadException() throw();
@@ -1341,7 +1341,7 @@ public:
 // A specific sort of exception that occurs when
 // recovery is required before continuing DB activity.
 //
-class _exported DbRunRecoveryException : public DbException
+class _exported __attribute__ ((visibility ("default"))) DbRunRecoveryException : public DbException
 {
 public:
 	virtual ~DbRunRecoveryException() throw();

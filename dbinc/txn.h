@@ -22,7 +22,7 @@ typedef enum {
 } TXN_EVENT_T;
 
 struct __db_txnregion;	typedef struct __db_txnregion DB_TXNREGION;
-struct __txn_logrec;	typedef struct __txn_logrec DB_TXNLOGREC;
+struct __attribute__ ((visibility ("default"))) __txn_logrec;	typedef struct __txn_logrec DB_TXNLOGREC;
 
 /*
  * !!!
@@ -82,7 +82,7 @@ typedef struct __txn_detail {
  * DB_TXNMGR --
  *	The transaction manager encapsulates the transaction system.
  */
-struct __db_txnmgr {
+struct __attribute__ ((visibility ("default"))) __db_txnmgr {
 	/*
 	 * These fields need to be protected for multi-threaded support.
 	 *
@@ -136,7 +136,7 @@ struct __db_txnregion {
  * DB_TXNLOGREC --
  *	An in-memory, linked-list copy of a log record.
  */
-struct __txn_logrec {
+struct __attribute__ ((visibility ("default"))) __txn_logrec {
 	STAILQ_ENTRY(__txn_logrec) links;/* Linked list. */
 
 	u_int8_t data[1];		/* Log record. */

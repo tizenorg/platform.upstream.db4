@@ -35,7 +35,7 @@ extern "C" {
 /*
  * This structure is per-process, not in shared memory.
  */
-struct __db_cipher {
+struct __attribute__ ((visibility ("default"))) __db_cipher {
 	u_int	(*adj_size) __P((size_t));
 	int	(*close) __P((ENV *, void *));
 	int	(*decrypt) __P((ENV *, void *, void *, u_int8_t *, size_t));

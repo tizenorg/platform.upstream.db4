@@ -52,7 +52,7 @@ struct __mpool;		typedef struct __mpool MPOOL;
  * DB_MPOOL --
  *	Per-process memory pool structure.
  */
-struct __db_mpool {
+struct __attribute__ ((visibility ("default"))) __db_mpool {
 	/* These fields need to be protected for multi-threaded support. */
 	db_mutex_t mutex;		/* Thread mutex. */
 
@@ -359,7 +359,7 @@ struct __db_mpool_hash {
  * MPOOLFILE --
  *	Shared DB_MPOOLFILE information.
  */
-struct __mpoolfile {
+struct __attribute__ ((visibility ("default"))) __mpoolfile {
 	db_mutex_t mutex;		/* MPOOLFILE mutex. */
 
 	/* Protected by MPOOLFILE mutex. */

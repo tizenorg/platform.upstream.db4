@@ -114,13 +114,13 @@ typedef struct __db_lockobj {
 					 * typical DB lock structures so that
 					 * we do not have to allocate them from
 					 * shalloc at run-time. */
-	u_int8_t objdata[sizeof(struct __db_ilock)];
+	u_int8_t objdata[sizeof(struct __attribute__ ((visibility ("default"))) __db_ilock)];
 } DB_LOCKOBJ;
 
 /*
  * Locker structures; these live in the locker hash table.
  */
-struct __db_locker {
+struct __attribute__ ((visibility ("default"))) __db_locker {
 	u_int32_t id;			/* Locker id. */
 
 	pid_t pid;			/* Process owning locker ID */
@@ -179,7 +179,7 @@ typedef struct __db_lockpart{
  *	The primary library lock data structure (i.e., the one referenced
  * by the environment, as opposed to the internal one laid out in the region.)
  */
-struct __db_locktab {
+struct __attribute__ ((visibility ("default"))) __db_locktab {
 	ENV		*env;		/* Environment. */
 	REGINFO		 reginfo;	/* Region information. */
 	u_int8_t	*conflicts;	/* Pointer to conflict matrix. */

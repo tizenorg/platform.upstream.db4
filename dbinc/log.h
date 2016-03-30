@@ -34,7 +34,7 @@ typedef	struct __db_entry {
  * FNAME --
  *	File name and id.
  */
-struct __fname {
+struct __attribute__ ((visibility ("default"))) __fname {
 	SH_TAILQ_ENTRY q;		/* File name queue. */
 
 	pid_t	  pid;			/* Process that owns this. */
@@ -101,7 +101,7 @@ struct __log_persist;	typedef struct __log_persist LOGP;
  * DB_LOG
  *	Per-process log structure.
  */
-struct __db_log {
+struct __attribute__ ((visibility ("default"))) __db_log {
 	/*
 	 * These fields need to be protected for multi-threaded support.
 	 */

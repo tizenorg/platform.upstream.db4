@@ -485,7 +485,7 @@ typedef struct __rep {
  * a lock (i.e. a mutex), recovery can clean it up so that it does not
  * indefinitely block other threads.
  */
-struct __db_rep {
+struct __attribute__ ((visibility ("default"))) __db_rep {
 	/*
 	 * Shared configuration information -- copied to and maintained in the
 	 * shared region as soon as the shared region is created.

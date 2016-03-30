@@ -18,14 +18,14 @@ extern "C" {
  */
 #define DB_NOERROR	0x10000000
 
-struct __db_foreign_info; \
+struct __attribute__ ((visibility ("default"))) __db_foreign_info; \
 			typedef struct __db_foreign_info DB_FOREIGN_INFO;
 
 /*
  * Keep track of information for foreign keys.  Used to maintain a linked list
  * of 'primary' DBs which reference this 'foreign' DB.
  */
-struct __db_foreign_info {
+struct __attribute__ ((visibility ("default"))) __db_foreign_info {
 	DB *dbp;
 	u_int32_t flags;
 	int (*callback) __P((DB *, const DBT *, DBT *, const DBT *, int *));

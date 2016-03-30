@@ -106,7 +106,7 @@ extern "C" {
 	PANIC_CHECK(env);
 
 /* DB filehandle. */
-struct __fh_t {
+struct __attribute__ ((visibility ("default"))) __fh_t {
 	/*
 	 * Linked list of DB_FH's, linked from the DB_ENV, used to keep track
 	 * of all open file handles for resource cleanup.

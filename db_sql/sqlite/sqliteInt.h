@@ -408,7 +408,7 @@ typedef struct AuthContext AuthContext;
 typedef struct Bitvec Bitvec;
 typedef struct CollSeq CollSeq;
 typedef struct Column Column;
-typedef struct Db Db;
+typedef struct __attribute__ ((visibility ("default"))) Db Db;
 typedef struct Schema Schema;
 typedef struct Expr Expr;
 typedef struct ExprList ExprList;
@@ -454,7 +454,7 @@ typedef struct WhereLevel WhereLevel;
 ** aDb[1] is the database file used to hold temporary tables.  Additional
 ** databases may be attached.
 */
-struct Db {
+struct __attribute__ ((visibility ("default"))) Db {
   char *zName;         /* Name of this database */
 #ifndef DB_SQL
   Btree *pBt;          /* The B*Tree structure for this database file */
