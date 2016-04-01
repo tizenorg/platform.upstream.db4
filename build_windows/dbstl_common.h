@@ -240,7 +240,7 @@ _exported void close_all_db_envs();
 /// \param flags It is set to DbEnv::txn_begin() function.
 /// \return The newly created transaction.
 ///
-_exported DbTxn* begin_txn(u_int32_t flags, DbEnv *env);
+__attribute__ ((visibility ("default"))) _exported DbTxn* begin_txn(u_int32_t flags, DbEnv *env);
 
 /// Commit current transaction opened in the environment "env".
 /// This function is called by user to commit an external explicit transaction.
@@ -277,7 +277,7 @@ _exported void abort_txn(DbEnv *env, DbTxn *txn);
 /// Get current transaction of environment "env".
 /// \param env The environment whose current transaction we want to get.
 /// \return Current transaction of env.
-_exported DbTxn* current_txn(DbEnv *env);
+__attribute__ ((visibility ("default"))) _exported DbTxn* current_txn(DbEnv *env);
 
 /// Set environment env's current transaction handle to be newtxn. The original
 /// transaction handle returned without aborting or commiting. This function
@@ -285,7 +285,7 @@ _exported DbTxn* current_txn(DbEnv *env);
 /// \param env The environment whose current transaction to replace.
 /// \param newtxn The new transaction to be as the current transaction of env.
 /// \return The old current transaction of env. It is not resolved.
-_exported DbTxn* set_current_txn_handle(DbEnv *env, DbTxn *newtxn);
+__attribute__ ((visibility ("default"))) _exported DbTxn* set_current_txn_handle(DbEnv *env, DbTxn *newtxn);
 //@} 
 
 /// \name Functions to open and register database/environment handles.
@@ -336,7 +336,7 @@ _exported void register_db_env(DbEnv *env1);
 /// \sa register_db(Db *);
 /// \sa open_db_env;
 ///
-_exported Db* open_db (DbEnv *penv, const char *filename, DBTYPE dbtype,
+__attribute__ ((visibility ("default"))) _exported Db* open_db (DbEnv *penv, const char *filename, DBTYPE dbtype,
     u_int32_t oflags, u_int32_t set_flags, int mode = 0644, DbTxn *txn = NULL,
     u_int32_t cflags = 0, const char* dbname = NULL);
 
@@ -360,7 +360,7 @@ _exported Db* open_db (DbEnv *penv, const char *filename, DBTYPE dbtype,
 /// \sa register_db_env(DbEnv *); 
 /// \sa open_db;
 ///
-_exported DbEnv* open_env(const char *env_home, u_int32_t set_flags,
+__attribute__ ((visibility ("default"))) _exported DbEnv* open_env(const char *env_home, u_int32_t set_flags,
     u_int32_t oflags = DB_CREATE | DB_INIT_MPOOL,
     u_int32_t cachesize = 4 * 1024 * 1024,
     int mode = 0644,

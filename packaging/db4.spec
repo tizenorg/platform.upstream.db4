@@ -64,6 +64,9 @@ This package contains the header files and libraries.
 cp %{SOURCE1001} .
 
 %build
+export CFLAGS+=" -fvisibility=hidden"
+  export CXXFLAGS+=" -fvisibility=hidden"
+  
 cd dist
 # dist/RELEASE codes the build date into the binary.
 # Use last change of changes file instead

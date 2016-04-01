@@ -172,7 +172,7 @@ struct __mpoolfile;	typedef struct __mpoolfile MPOOLFILE;
 #define	DB_JOINENV	      0x0
 
 /* Key/data structure -- a Data-Base Thang. */
-struct __db_dbt {
+struct __attribute__ ((visibility ("default"))) __db_dbt {
 	void	 *data;			/* Key/data */
 	u_int32_t size;			/* key/data length */
 
@@ -201,7 +201,7 @@ struct __db_dbt {
  *******************************************************/
 typedef u_int32_t	db_mutex_t;
 
-struct __db_mutex_stat {
+struct __attribute__ ((visibility ("default"))) __db_mutex_stat {
 	/* The following fields are maintained in the region's copy. */
 	u_int32_t st_mutex_align;	/* Mutex alignment */
 	u_int32_t st_mutex_tas_spins;	/* Mutex test-and-set spins */
@@ -295,7 +295,7 @@ typedef enum  {
 }db_status_t;
 
 /* Lock statistics structure. */
-struct __db_lock_stat {
+struct __attribute__ ((visibility ("default"))) __db_lock_stat {
 	u_int32_t st_id;		/* Last allocated locker ID. */
 	u_int32_t st_cur_maxid;		/* Current maximum unused ID. */
 	u_int32_t st_maxlocks;		/* Maximum number of locks in table. */
@@ -342,7 +342,7 @@ struct __db_lock_stat {
 #endif
 };
 
-struct __db_lock_hstat {
+struct __attribute__ ((visibility ("default"))) __db_lock_hstat {
 	uintmax_t st_nrequests;		/* Number of lock gets. */
 	uintmax_t st_nreleases;		/* Number of lock puts. */
 	uintmax_t st_nupgrade;		/* Number of lock upgrades. */
@@ -358,7 +358,7 @@ struct __db_lock_hstat {
 	u_int32_t st_hash_len;		/* Max length of bucket. */
 };
 
-struct __db_lock_pstat {
+struct __attribute__ ((visibility ("default"))) __db_lock_pstat {
 	u_int32_t st_nlocks;		/* Current number of locks. */
 	u_int32_t st_maxnlocks;		/* Maximum number of locks so far. */
 	u_int32_t st_nobjects;		/* Current number of objects. */
@@ -371,7 +371,7 @@ struct __db_lock_pstat {
  * DB_LOCK_ILOCK --
  *	Internal DB access method lock.
  */
-struct __db_ilock {
+struct __attribute__ ((visibility ("default"))) __db_ilock {
 	db_pgno_t pgno;			/* Page being locked. */
 	u_int8_t fileid[DB_FILE_ID_LEN];/* File id. */
 #define	DB_HANDLE_LOCK	1
@@ -385,7 +385,7 @@ struct __db_ilock {
  *	The structure is allocated by the caller and filled in during a
  *	lock_get request (or a lock_vec/DB_LOCK_GET).
  */
-struct __db_lock_u {
+struct __attribute__ ((visibility ("default"))) __db_lock_u {
 	roff_t		off;		/* Offset of the lock in the region */
 	u_int32_t	ndx;		/* Index of the object referenced by
 					 * this lock; used for locking. */
@@ -394,7 +394,7 @@ struct __db_lock_u {
 };
 
 /* Lock request structure. */
-struct __db_lockreq {
+struct __attribute__ ((visibility ("default"))) __db_lockreq {
 	db_lockop_t	 op;		/* Operation. */
 	db_lockmode_t	 mode;		/* Requested mode. */
 	db_timeout_t	 timeout;	/* Time to expire lock. */
@@ -420,7 +420,7 @@ struct __db_lockreq {
  * to a new log file before the maximum length imposed by an unsigned 4-byte
  * offset is reached.
  */
-struct __db_lsn {
+struct __attribute__ ((visibility ("default"))) __db_lsn {
 	u_int32_t	file;		/* File ID. */
 	u_int32_t	offset;		/* File offset. */
 };
@@ -441,7 +441,7 @@ struct __db_lsn {
  * DB_LOGC --
  *	Log cursor.
  */
-struct __db_log_cursor {
+struct __attribute__ ((visibility ("default"))) __db_log_cursor {
 	ENV	 *env;			/* Environment */
 
 	DB_FH	 *fhp;			/* File handle. */
@@ -473,7 +473,7 @@ struct __db_log_cursor {
 };
 
 /* Log statistics structure. */
-struct __db_log_stat {
+struct __attribute__ ((visibility ("default"))) __db_log_stat {
 	u_int32_t st_magic;		/* Log file magic number. */
 	u_int32_t st_version;		/* Log file version number. */
 	int	  st_mode;		/* Log file permissions mode. */
@@ -525,7 +525,7 @@ typedef enum {
 } DB_CACHE_PRIORITY;
 
 /* Per-process DB_MPOOLFILE information. */
-struct __db_mpoolfile {
+struct __attribute__ ((visibility ("default"))) __db_mpoolfile {
 	DB_FH	  *fhp;			/* Underlying file handle. */
 
 	/*
@@ -617,7 +617,7 @@ struct __db_mpoolfile {
 };
 
 /* Mpool statistics structure. */
-struct __db_mpool_stat {
+struct __attribute__ ((visibility ("default"))) __db_mpool_stat {
 	u_int32_t st_gbytes;		/* Total cache size: GB. */
 	u_int32_t st_bytes;		/* Total cache size: B. */
 	u_int32_t st_ncache;		/* Number of cache regions. */
@@ -665,7 +665,7 @@ struct __db_mpool_stat {
 };
 
 /* Mpool file statistics structure. */
-struct __db_mpool_fstat {
+struct __attribute__ ((visibility ("default"))) __db_mpool_fstat {
 	char *file_name;		/* File name. */
 	u_int32_t st_pagesize;		/* Page size. */
 #ifndef __TEST_DB_NO_STATISTICS
@@ -702,7 +702,7 @@ typedef enum {
 #define	DB_UNDO(op)	((op) == DB_TXN_ABORT || (op) == DB_TXN_BACKWARD_ROLL)
 #define	DB_REDO(op)	((op) == DB_TXN_FORWARD_ROLL || (op) == DB_TXN_APPLY)
 
-struct __db_txn {
+struct __attribute__ ((visibility ("default"))) __db_txn {
 	DB_TXNMGR	*mgrp;		/* Pointer to transaction manager. */
 	DB_TXN		*parent;	/* Pointer to transaction's parent. */
 	DB_THREAD_INFO	*thread_info;	/* Pointer to thread information. */
@@ -812,13 +812,13 @@ struct __db_txn {
  * to match that defined by the XA X/Open standard.
  */
 #define	DB_GID_SIZE	128
-struct __db_preplist {
+struct __attribute__ ((visibility ("default"))) __db_preplist {
 	DB_TXN	*txn;
 	u_int8_t gid[DB_GID_SIZE];
 };
 
 /* Transaction statistics structure. */
-struct __db_txn_active {
+struct __attribute__ ((visibility ("default"))) __db_txn_active {
 	u_int32_t txnid;		/* Transaction ID */
 	u_int32_t parentid;		/* Transaction ID of parent */
 	pid_t     pid;			/* Process owning txn ID */
@@ -839,7 +839,7 @@ struct __db_txn_active {
 	char	  name[51];		/* 50 bytes of name, nul termination */
 };
 
-struct __db_txn_stat {
+struct __attribute__ ((visibility ("default"))) __db_txn_stat {
 	u_int32_t st_nrestores;		/* number of restored transactions
 					   after recovery. */
 #ifndef __TEST_DB_NO_STATISTICS
@@ -903,7 +903,7 @@ struct __db_txn_stat {
 #define	DB_EVENT_WRITE_FAILED		10
 
 /* Replication Manager site status. */
-struct __db_repmgr_site {
+struct __attribute__ ((visibility ("default"))) __db_repmgr_site {
 	int eid;
 	char *host;
 	u_int port;
@@ -914,7 +914,7 @@ struct __db_repmgr_site {
 };
 
 /* Replication statistics. */
-struct __db_rep_stat {
+struct __attribute__ ((visibility ("default"))) __db_rep_stat {
 	/* !!!
 	 * Many replication statistics fields cannot be protected by a mutex
 	 * without an unacceptable performance penalty, since most message
@@ -1001,7 +1001,7 @@ struct __db_rep_stat {
 };
 
 /* Replication Manager statistics. */
-struct __db_repmgr_stat {
+struct __attribute__ ((visibility ("default"))) __db_repmgr_stat {
 	uintmax_t st_perm_failed;	/* # of insufficiently ack'ed msgs. */
 	uintmax_t st_msgs_queued;	/* # msgs queued for network delay. */
 	uintmax_t st_msgs_dropped;	/* # msgs discarded due to excessive
@@ -1016,7 +1016,7 @@ struct __db_repmgr_stat {
 /*
  * The storage record for a sequence.
  */
-struct __db_seq_record {
+struct __attribute__ ((visibility ("default"))) __db_seq_record {
 	u_int32_t	seq_version;	/* Version size/number. */
 	u_int32_t	flags;		/* DB_SEQ_XXX Flags. */
 	db_seq_t	seq_value;	/* Current value. */
@@ -1027,7 +1027,7 @@ struct __db_seq_record {
 /*
  * Handle for a sequence object.
  */
-struct __db_sequence {
+struct __attribute__ ((visibility ("default"))) __db_sequence {
 	DB		*seq_dbp;	/* DB handle for this sequence. */
 	db_mutex_t	mtx_seq;	/* Mutex if sequence is threaded. */
 	DB_SEQ_RECORD	*seq_rp;	/* Pointer to current data. */
@@ -1063,7 +1063,7 @@ struct __db_sequence {
 	/* DB_SEQUENCE PUBLIC HANDLE LIST END */
 };
 
-struct __db_seq_stat {
+struct __attribute__ ((visibility ("default"))) __db_seq_stat {
 	uintmax_t st_wait;		/* Sequence lock granted w/o wait. */
 	uintmax_t st_nowait;		/* Sequence lock granted after wait. */
 	db_seq_t  st_current;		/* Current value in db. */
@@ -1201,7 +1201,7 @@ typedef enum {
 #define	DB_VERIFY_FATAL		(-30885)/* DB->verify cannot proceed. */
 
 /* Database handle. */
-struct __db {
+struct __attribute__ ((visibility ("default"))) __db {
 	/*******************************************************
 	 * Public: owned by the application.
 	 *******************************************************/
@@ -1755,7 +1755,7 @@ struct __db {
 /*******************************************************
  * Access method cursors.
  *******************************************************/
-struct __dbc {
+struct __attribute__ ((visibility ("default"))) __dbc {
 	DB *dbp;			/* Backing database */
 	DB_ENV *dbenv;			/* Backing environment */
 	ENV *env;			/* Backing environment */
@@ -1870,14 +1870,14 @@ struct __dbc {
 };
 
 /* Key range statistics structure */
-struct __key_range {
+struct __attribute__ ((visibility ("default"))) __key_range {
 	double less;
 	double equal;
 	double greater;
 };
 
 /* Btree/Recno statistics structure. */
-struct __db_bt_stat {
+struct __attribute__ ((visibility ("default"))) __db_bt_stat {
 	u_int32_t bt_magic;		/* Magic number. */
 	u_int32_t bt_version;		/* Version number. */
 	u_int32_t bt_metaflags;		/* Metadata flags. */
@@ -1901,7 +1901,7 @@ struct __db_bt_stat {
 	uintmax_t bt_over_pgfree;	/* Bytes free in overflow pages. */
 };
 
-struct __db_compact {
+struct __attribute__ ((visibility ("default"))) __db_compact {
 	/* Input Parameters. */
 	u_int32_t	compact_fillpercent;	/* Desired fillfactor: 1-100 */
 	db_timeout_t	compact_timeout;	/* Lock timeout. */
@@ -1917,7 +1917,7 @@ struct __db_compact {
 };
 
 /* Hash statistics structure. */
-struct __db_h_stat {
+struct __attribute__ ((visibility ("default"))) __db_h_stat {
 	u_int32_t hash_magic;		/* Magic number. */
 	u_int32_t hash_version;		/* Version number. */
 	u_int32_t hash_metaflags;	/* Metadata flags. */
@@ -1938,7 +1938,7 @@ struct __db_h_stat {
 };
 
 /* Queue statistics structure. */
-struct __db_qam_stat {
+struct __attribute__ ((visibility ("default"))) __db_qam_stat {
 	u_int32_t qs_magic;		/* Magic number. */
 	u_int32_t qs_version;		/* Version number. */
 	u_int32_t qs_metaflags;		/* Metadata flags. */
@@ -1972,7 +1972,7 @@ struct __db_qam_stat {
  * Fields in the DB_ENV structure should normally be set only by application
  * DB_ENV handle methods.
  */
-struct __db_env {
+struct __attribute__ ((visibility ("default"))) __db_env {
 	ENV *env;			/* Linked ENV structure */
 
 	/*
@@ -2322,7 +2322,7 @@ struct __db_env {
  * external routines take different arguments (ENV versus DB_ENV), we need
  * something more elaborate than a single pointer and size.
  */
-struct __db_distab {
+struct __attribute__ ((visibility ("default"))) __db_distab {
 	int   (**int_dispatch) __P((ENV *, DBT *, DB_LSN *, db_recops, void *));
 	size_t	int_size;
 	int   (**ext_dispatch) __P((DB_ENV *, DBT *, DB_LSN *, db_recops));
@@ -2614,33 +2614,33 @@ typedef struct entry {
 extern "C" {
 #endif
 
-int db_create __P((DB **, DB_ENV *, u_int32_t));
-char *db_strerror __P((int));
-int db_env_set_func_close __P((int (*)(int)));
-int db_env_set_func_dirfree __P((void (*)(char **, int)));
-int db_env_set_func_dirlist __P((int (*)(const char *, char ***, int *)));
-int db_env_set_func_exists __P((int (*)(const char *, int *)));
-int db_env_set_func_free __P((void (*)(void *)));
-int db_env_set_func_fsync __P((int (*)(int)));
-int db_env_set_func_ftruncate __P((int (*)(int, off_t)));
-int db_env_set_func_ioinfo __P((int (*)(const char *, int, u_int32_t *, u_int32_t *, u_int32_t *)));
-int db_env_set_func_malloc __P((void *(*)(size_t)));
-int db_env_set_func_file_map __P((int (*)(DB_ENV *, char *, size_t, int, void **), int (*)(DB_ENV *, void *)));
-int db_env_set_func_region_map __P((int (*)(DB_ENV *, char *, size_t, int *, void **), int (*)(DB_ENV *, void *)));
-int db_env_set_func_pread __P((ssize_t (*)(int, void *, size_t, off_t)));
-int db_env_set_func_pwrite __P((ssize_t (*)(int, const void *, size_t, off_t)));
-int db_env_set_func_open __P((int (*)(const char *, int, ...)));
-int db_env_set_func_read __P((ssize_t (*)(int, void *, size_t)));
-int db_env_set_func_realloc __P((void *(*)(void *, size_t)));
-int db_env_set_func_rename __P((int (*)(const char *, const char *)));
-int db_env_set_func_seek __P((int (*)(int, off_t, int)));
-int db_env_set_func_unlink __P((int (*)(const char *)));
-int db_env_set_func_write __P((ssize_t (*)(int, const void *, size_t)));
-int db_env_set_func_yield __P((int (*)(u_long, u_long)));
-int db_env_create __P((DB_ENV **, u_int32_t));
-char *db_version __P((int *, int *, int *));
-int log_compare __P((const DB_LSN *, const DB_LSN *));
-int db_sequence_create __P((DB_SEQUENCE **, DB *, u_int32_t));
+__attribute__ ((visibility ("default"))) int db_create __P((DB **, DB_ENV *, u_int32_t));
+__attribute__ ((visibility ("default"))) char *db_strerror __P((int));
+__attribute__ ((visibility ("default"))) int db_env_set_func_close __P((int (*)(int)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_dirfree __P((void (*)(char **, int)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_dirlist __P((int (*)(const char *, char ***, int *)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_exists __P((int (*)(const char *, int *)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_free __P((void (*)(void *)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_fsync __P((int (*)(int)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_ftruncate __P((int (*)(int, off_t)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_ioinfo __P((int (*)(const char *, int, u_int32_t *, u_int32_t *, u_int32_t *)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_malloc __P((void *(*)(size_t)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_file_map __P((int (*)(DB_ENV *, char *, size_t, int, void **), int (*)(DB_ENV *, void *)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_region_map __P((int (*)(DB_ENV *, char *, size_t, int *, void **), int (*)(DB_ENV *, void *)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_pread __P((ssize_t (*)(int, void *, size_t, off_t)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_pwrite __P((ssize_t (*)(int, const void *, size_t, off_t)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_open __P((int (*)(const char *, int, ...)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_read __P((ssize_t (*)(int, void *, size_t)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_realloc __P((void *(*)(void *, size_t)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_rename __P((int (*)(const char *, const char *)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_seek __P((int (*)(int, off_t, int)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_unlink __P((int (*)(const char *)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_write __P((ssize_t (*)(int, const void *, size_t)));
+__attribute__ ((visibility ("default"))) int db_env_set_func_yield __P((int (*)(u_long, u_long)));
+__attribute__ ((visibility ("default"))) int db_env_create __P((DB_ENV **, u_int32_t));
+__attribute__ ((visibility ("default"))) char *db_version __P((int *, int *, int *));
+__attribute__ ((visibility ("default"))) int log_compare __P((const DB_LSN *, const DB_LSN *));
+__attribute__ ((visibility ("default"))) int db_sequence_create __P((DB_SEQUENCE **, DB *, u_int32_t));
 #if DB_DBM_HSEARCH != 0
 int	 __db_ndbm_clearerr __P((DBM *));
 void	 __db_ndbm_close __P((DBM *));
