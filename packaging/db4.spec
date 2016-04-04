@@ -64,8 +64,6 @@ This package contains the header files and libraries.
 cp %{SOURCE1001} .
 
 %build
-export CFLAGS+=" -fvisibility=hidden"
-  export CXXFLAGS+=" -fvisibility=hidden"
   
 cd dist
 # dist/RELEASE codes the build date into the binary.
@@ -80,6 +78,8 @@ export CFLAGS CXXFLAGS CC
 #
 # Build now the NPTL version
 #
+export CFLAGS+=" -fvisibility=hidden"
+  export CXXFLAGS+=" -fvisibility=hidden"
 mkdir ../build_nptl
 cd ../build_nptl
 ../dist/configure --prefix=%{_prefix} \
